@@ -39,6 +39,15 @@
     --red-accent-600: #dc2626;
     --red-accent-700: #b91c1c;
 
+    --yellow-accent-50: #fefce8;
+    --yellow-accent-100: #fef9c3;
+    --yellow-accent-200: #fef08a;
+    --yellow-accent-300: #fde047;
+    --yellow-accent-400: #facc15;
+    --yellow-accent-500: #eab308;
+    --yellow-accent-600: #ca8a04;
+    --yellow-accent-700: #a16207;
+
     /* UI colors */
     --card: #ffffff;
     --card-foreground: #171717;
@@ -100,6 +109,15 @@
     --red-accent-500: #f87171;
     --red-accent-600: #fca5a5;
     --red-accent-700: #fecaca;
+
+    --yellow-accent-50: #7c2d12;
+    --yellow-accent-100: #92400e;
+    --yellow-accent-200: #a16207;
+    --yellow-accent-300: #ca8a04;
+    --yellow-accent-400: #eab308;
+    --yellow-accent-500: #facc15;
+    --yellow-accent-600: #fde047;
+    --yellow-accent-700: #fef08a;
 
     /* UI colors */
     --card: #1e293b;

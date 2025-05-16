@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { transactions, Transaction, stats } from "./data/mockData";
 import StatsGrid from "./components/StatsGrid";
 import QuickActions from "./components/QuickActions";
@@ -49,6 +49,8 @@ export default function Home() {
   const [selectedCategory, setSelectedCategory] = useState<string>("");
   const [dateFrom, setDateFrom] = useState<string>("");
   const [dateTo, setDateTo] = useState<string>("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 6;
 
   const filteredTransactions = useMemo(() => {
     return transactions.filter((transaction: Transaction) => {
@@ -60,10 +62,22 @@ export default function Home() {
     });
   }, [selectedCategory, dateFrom, dateTo]);
 
+  // Pagination calculations
+  const totalPages = Math.ceil(filteredTransactions.length / itemsPerPage);
+  const paginatedTransactions = useMemo(() => {
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    return filteredTransactions.slice(startIndex, startIndex + itemsPerPage);
+  }, [filteredTransactions, currentPage]);
+
   // Get unique categories for the filter dropdown
   const categories = useMemo(() => {
     return Array.from(new Set(transactions.map((t) => t.category)));
   }, []);
+
+  // Reset to first page when filters change
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [selectedCategory, dateFrom, dateTo]);
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -140,7 +154,7 @@ export default function Home() {
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-border">
-                    {filteredTransactions.map((transaction) => (
+                    {paginatedTransactions.map((transaction) => (
                       <tr key={transaction.id}>
                         <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-foreground sm:pl-0">
                           {transaction.date}
@@ -180,6 +194,29 @@ export default function Home() {
                 </table>
               </div>
             </div>
+          </div>
+
+          {/* Pagination controls */}
+          <div className="mt-4 flex justify-between">
+            <button
+              onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+              disabled={currentPage === 1}
+              className="px-4 py-2 text-sm font-semibold bg-card text-foreground rounded-md shadow-sm disabled:opacity-50"
+            >
+              Previous
+            </button>
+            <span className="self-center text-sm text-muted-foreground">
+              Page {currentPage} of {totalPages}
+            </span>
+            <button
+              onClick={() =>
+                setCurrentPage((prev) => Math.min(prev + 1, totalPages))
+              }
+              disabled={currentPage === totalPages}
+              className="px-4 py-2 text-sm font-semibold bg-card text-foreground rounded-md shadow-sm disabled:opacity-50"
+            >
+              Next
+            </button>
           </div>
         </div>
 
