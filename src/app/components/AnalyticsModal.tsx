@@ -1,27 +1,38 @@
 import { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import Charts from "./Charts";
+import { XMarkIcon } from "@heroicons/react/24/outline";
+import { Transaction } from "../data/mockData";
 
 interface AnalyticsModalProps {
   isOpen: boolean;
   onClose: () => void;
-  monthlyData: Array<{
-    month: string;
-    income: number;
-    expenses: number;
-  }>;
-  spendingData: Array<{
-    category: string;
-    amount: number;
-  }>;
+  transactions: Transaction[];
 }
 
 export default function AnalyticsModal({
   isOpen,
   onClose,
-  monthlyData,
-  spendingData,
+  transactions,
 }: AnalyticsModalProps) {
+  // Calculate total income
+  const totalIncome = transactions
+    .filter((t) => t.amount > 0)
+    .reduce((sum, t) => sum + t.amount, 0);
+
+  // Calculate total expenses
+  const totalExpenses = transactions
+    .filter((t) => t.amount < 0)
+    .reduce((sum, t) => sum + Math.abs(t.amount), 0);
+
+  // Calculate by category
+  const categoryTotals = transactions.reduce((acc, t) => {
+    if (!acc[t.category]) {
+      acc[t.category] = 0;
+    }
+    acc[t.category] += Math.abs(t.amount);
+    return acc;
+  }, {} as Record<string, number>);
+
   return (
     <Transition.Root show={isOpen} as={Fragment}>
       <Dialog as="div" className="relative z-10" onClose={onClose}>
@@ -34,7 +45,7 @@ export default function AnalyticsModal({
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
+          <div className="fixed inset-0 bg-background/80 transition-opacity" />
         </Transition.Child>
 
         <div className="fixed inset-0 z-10 overflow-y-auto">
@@ -48,91 +59,66 @@ export default function AnalyticsModal({
               leaveFrom="opacity-100 translate-y-0 sm:scale-100"
               leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
-              <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white dark:bg-gray-800 px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-4xl sm:p-6">
-                <div>
-                  <div className="mt-3 text-center sm:mt-5">
+              <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-card text-card-foreground px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg sm:p-6">
+                <div className="absolute right-0 top-0 pr-4 pt-4">
+                  <button
+                    type="button"
+                    className="rounded-md bg-card text-muted-foreground hover:text-foreground focus:outline-none"
+                    onClick={onClose}
+                  >
+                    <span className="sr-only">Close</span>
+                    <XMarkIcon className="h-6 w-6" aria-hidden="true" />
+                  </button>
+                </div>
+                <div className="sm:flex sm:items-start">
+                  <div className="mt-3 text-center sm:mt-0 sm:text-left w-full">
                     <Dialog.Title
                       as="h3"
-                      className="text-base font-semibold leading-6 text-gray-900 dark:text-white mb-4"
+                      className="text-lg font-semibold leading-6 text-foreground"
                     >
-                      Detailed Analytics
+                      Analytics Overview
                     </Dialog.Title>
-                    <div className="mt-2">
-                      <Charts
-                        monthlyData={monthlyData}
-                        spendingData={spendingData}
-                      />
-
-                      <div className="mt-6">
-                        <h4 className="text-sm font-medium text-gray-900 dark:text-white mb-4">
-                          Summary
+                    <div className="mt-4 space-y-4">
+                      <div>
+                        <h4 className="text-sm font-medium text-muted-foreground">
+                          Total Income
                         </h4>
-                        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                          <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
-                            <h5 className="text-sm font-medium text-gray-500 dark:text-gray-400">
-                              Monthly Average
-                            </h5>
-                            <div className="mt-2">
-                              <p className="text-sm text-gray-900 dark:text-white">
-                                Income:{" "}
-                                <span className="font-medium">
-                                  $
-                                  {(
-                                    monthlyData.reduce(
-                                      (acc, curr) => acc + curr.income,
-                                      0
-                                    ) / monthlyData.length
-                                  ).toFixed(2)}
+                        <p className="text-2xl font-semibold text-green-accent-600 dark:text-green-accent-400">
+                          ${totalIncome.toFixed(2)}
+                        </p>
+                      </div>
+                      <div>
+                        <h4 className="text-sm font-medium text-muted-foreground">
+                          Total Expenses
+                        </h4>
+                        <p className="text-2xl font-semibold text-red-accent-600 dark:text-red-accent-400">
+                          ${totalExpenses.toFixed(2)}
+                        </p>
+                      </div>
+                      <div>
+                        <h4 className="text-sm font-medium text-muted-foreground mb-2">
+                          By Category
+                        </h4>
+                        <div className="space-y-2">
+                          {Object.entries(categoryTotals)
+                            .sort(([, a], [, b]) => b - a)
+                            .map(([category, amount]) => (
+                              <div
+                                key={category}
+                                className="flex justify-between items-center text-sm"
+                              >
+                                <span className="text-foreground">
+                                  {category}
                                 </span>
-                              </p>
-                              <p className="text-sm text-gray-900 dark:text-white">
-                                Expenses:{" "}
-                                <span className="font-medium">
-                                  $
-                                  {(
-                                    monthlyData.reduce(
-                                      (acc, curr) => acc + curr.expenses,
-                                      0
-                                    ) / monthlyData.length
-                                  ).toFixed(2)}
+                                <span className="text-muted-foreground">
+                                  ${amount.toFixed(2)}
                                 </span>
-                              </p>
-                            </div>
-                          </div>
-                          <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
-                            <h5 className="text-sm font-medium text-gray-500 dark:text-gray-400">
-                              Top Spending Categories
-                            </h5>
-                            <div className="mt-2">
-                              {[...spendingData]
-                                .sort((a, b) => b.amount - a.amount)
-                                .slice(0, 3)
-                                .map((item) => (
-                                  <p
-                                    key={item.category}
-                                    className="text-sm text-gray-900 dark:text-white"
-                                  >
-                                    {item.category}:{" "}
-                                    <span className="font-medium">
-                                      ${item.amount}
-                                    </span>
-                                  </p>
-                                ))}
-                            </div>
-                          </div>
+                              </div>
+                            ))}
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
-                <div className="mt-5 sm:mt-6">
-                  <button
-                    type="button"
-                    className="inline-flex w-full justify-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
-                    onClick={onClose}
-                  >
-                    Close
-                  </button>
                 </div>
               </Dialog.Panel>
             </Transition.Child>

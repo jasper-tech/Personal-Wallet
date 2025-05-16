@@ -1,68 +1,80 @@
 import {
-  ArrowDownIcon,
-  ArrowUpIcon,
   ArrowsRightLeftIcon,
-  ChartPieIcon,
+  ArrowUpIcon,
+  ArrowDownIcon,
+  ChartBarIcon,
 } from "@heroicons/react/24/outline";
 
 interface QuickActionsProps {
   onTransfer: () => void;
-  onSendMoney: () => void;
-  onRequestMoney: () => void;
+  onSend: () => void;
+  onRequest: () => void;
   onAnalytics: () => void;
 }
 
 export default function QuickActions({
   onTransfer,
-  onSendMoney,
-  onRequestMoney,
+  onSend,
+  onRequest,
   onAnalytics,
 }: QuickActionsProps) {
+  const actions = [
+    {
+      name: "Transfer",
+      description: "Transfer between accounts",
+      icon: ArrowsRightLeftIcon,
+      onClick: onTransfer,
+      bgColor: "bg-blue-accent-100 dark:bg-blue-accent-900/30",
+      textColor: "text-blue-accent-700 dark:text-blue-accent-400",
+    },
+    {
+      name: "Send",
+      description: "Send money to someone",
+      icon: ArrowUpIcon,
+      onClick: onSend,
+      bgColor: "bg-green-accent-100 dark:bg-green-accent-900/30",
+      textColor: "text-green-accent-700 dark:text-green-accent-400",
+    },
+    {
+      name: "Request",
+      description: "Request money from someone",
+      icon: ArrowDownIcon,
+      onClick: onRequest,
+      bgColor: "bg-red-accent-100 dark:bg-red-accent-900/30",
+      textColor: "text-red-accent-700 dark:text-red-accent-400",
+    },
+    {
+      name: "Analytics",
+      description: "View detailed analytics",
+      icon: ChartBarIcon,
+      onClick: onAnalytics,
+      bgColor: "bg-yellow-accent-100 dark:bg-yellow-accent-900/30",
+      textColor: "text-yellow-accent-700 dark:text-yellow-accent-400",
+    },
+  ];
+
   return (
-    <div className="bg-card text-card-foreground rounded-lg shadow mb-8">
-      <div className="p-6">
-        <h2 className="text-lg font-medium text-gray-900 dark:text-white mb-4">
-          Quick Actions
-        </h2>
-        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
-          <button
-            onClick={onSendMoney}
-            className="flex flex-col items-center justify-center p-4 rounded-lg border-2 border-gray-200 dark:border-gray-700 hover:border-blue-500 dark:hover:border-blue-500 transition-colors"
-          >
-            <ArrowUpIcon className="h-8 w-8 text-gray-600 dark:text-gray-400 mb-2" />
-            <span className="text-sm text-gray-600 dark:text-gray-400">
-              Send Money
-            </span>
-          </button>
-          <button
-            onClick={onRequestMoney}
-            className="flex flex-col items-center justify-center p-4 rounded-lg border-2 border-gray-200 dark:border-gray-700 hover:border-blue-500 dark:hover:border-blue-500 transition-colors"
-          >
-            <ArrowDownIcon className="h-8 w-8 text-gray-600 dark:text-gray-400 mb-2" />
-            <span className="text-sm text-gray-600 dark:text-gray-400">
-              Request Money
-            </span>
-          </button>
-          <button
-            onClick={onTransfer}
-            className="flex flex-col items-center justify-center p-4 rounded-lg border-2 border-gray-200 dark:border-gray-700 hover:border-blue-500 dark:hover:border-blue-500 transition-colors"
-          >
-            <ArrowsRightLeftIcon className="h-8 w-8 text-gray-600 dark:text-gray-400 mb-2" />
-            <span className="text-sm text-gray-600 dark:text-gray-400">
-              Transfer
-            </span>
-          </button>
-          <button
-            onClick={onAnalytics}
-            className="flex flex-col items-center justify-center p-4 rounded-lg border-2 border-gray-200 dark:border-gray-700 hover:border-blue-500 dark:hover:border-blue-500 transition-colors"
-          >
-            <ChartPieIcon className="h-8 w-8 text-gray-600 dark:text-gray-400 mb-2" />
-            <span className="text-sm text-gray-600 dark:text-gray-400">
-              Analytics
-            </span>
-          </button>
-        </div>
-      </div>
+    <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      {actions.map((action) => (
+        <button
+          key={action.name}
+          onClick={action.onClick}
+          className={`relative flex items-center space-x-3 rounded-lg px-6 py-5 shadow-sm focus:outline-none ${action.bgColor}`}
+        >
+          <div className={`flex-shrink-0 ${action.textColor}`}>
+            <action.icon className="h-6 w-6" aria-hidden="true" />
+          </div>
+          <div className="min-w-0 flex-1">
+            <span className="absolute inset-0" aria-hidden="true" />
+            <p className={`text-sm font-medium ${action.textColor}`}>
+              {action.name}
+            </p>
+            <p className={`text-sm ${action.textColor}`}>
+              {action.description}
+            </p>
+          </div>
+        </button>
+      ))}
     </div>
   );
 }
