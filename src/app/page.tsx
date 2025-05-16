@@ -12,6 +12,35 @@ import TransactionFilters from "./components/TransactionFilters";
 import Charts from "./components/Charts";
 import ThemeToggle from "./components/ThemeToggle";
 
+const styles = {
+  positiveAmount: {
+    color: "var(--green-accent-500)",
+  },
+  negativeAmount: {
+    color: "var(--red-accent-500)",
+  },
+  statusCompleted: {
+    backgroundColor: "var(--green-accent-100)",
+    color: "var(--green-accent-600)",
+    borderRadius: "9999px",
+    padding: "0.25rem 0.625rem",
+    fontSize: "0.75rem",
+    fontWeight: 500,
+    display: "inline-flex",
+    alignItems: "center",
+  },
+  statusPending: {
+    backgroundColor: "var(--yellow-accent-100)",
+    color: "var(--warning)",
+    borderRadius: "9999px",
+    padding: "0.25rem 0.625rem",
+    fontSize: "0.75rem",
+    fontWeight: 500,
+    display: "inline-flex",
+    alignItems: "center",
+  },
+};
+
 export default function Home() {
   const [showTransferModal, setShowTransferModal] = useState(false);
   const [showSendModal, setShowSendModal] = useState(false);
@@ -93,19 +122,19 @@ export default function Home() {
                 <table className="min-w-full divide-y divide-border">
                   <thead>
                     <tr>
-                      <th className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-foreground sm:pl-0">
+                      <th className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold  sm:pl-0">
                         Date
                       </th>
-                      <th className="px-3 py-3.5 text-left text-sm font-semibold text-foreground">
+                      <th className="px-3 py-3.5 text-left text-sm font-semibold ">
                         Description
                       </th>
-                      <th className="px-3 py-3.5 text-left text-sm font-semibold text-foreground">
+                      <th className="px-3 py-3.5 text-left text-sm font-semibold ">
                         Category
                       </th>
-                      <th className="px-3 py-3.5 text-left text-sm font-semibold text-foreground">
+                      <th className="px-3 py-3.5 text-left text-sm font-semibold ">
                         Amount
                       </th>
-                      <th className="px-3 py-3.5 text-left text-sm font-semibold text-foreground">
+                      <th className="px-3 py-3.5 text-left text-sm font-semibold ">
                         Status
                       </th>
                     </tr>
@@ -123,11 +152,12 @@ export default function Home() {
                           {transaction.category}
                         </td>
                         <td
-                          className={`whitespace-nowrap px-3 py-4 text-sm ${
+                          className="whitespace-nowrap px-3 py-4 text-sm"
+                          style={
                             transaction.amount >= 0
-                              ? "text-green-accent-600 dark:text-green-accent-400"
-                              : "text-red-accent-600 dark:text-red-accent-400"
-                          }`}
+                              ? styles.positiveAmount
+                              : styles.negativeAmount
+                          }
                         >
                           {transaction.amount >= 0
                             ? `+$${transaction.amount.toFixed(2)}`
@@ -135,11 +165,11 @@ export default function Home() {
                         </td>
                         <td className="whitespace-nowrap px-3 py-4 text-sm">
                           <span
-                            className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${
+                            style={
                               transaction.status === "Completed"
-                                ? "bg-green-accent-100 text-green-accent-700 dark:bg-green-accent-900/30 dark:text-green-accent-400"
-                                : "bg-yellow-accent-100 text-yellow-accent-700 dark:bg-yellow-accent-900/30 dark:text-yellow-accent-400"
-                            }`}
+                                ? styles.statusCompleted
+                                : styles.statusPending
+                            }
                           >
                             {transaction.status}
                           </span>

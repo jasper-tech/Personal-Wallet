@@ -12,6 +12,34 @@ interface StatsGridProps {
   stats: StatItem[];
 }
 
+const styles = {
+  statAmount: {
+    fontSize: "1.5rem",
+    fontWeight: 600,
+    color: "var(--blue-accent-500)",
+  },
+  statName: {
+    fontSize: "0.875rem",
+    fontWeight: 700,
+    whiteSpace: "nowrap",
+    overflow: "hidden",
+    textOverflow: "ellipsis",
+  },
+  statChange: {
+    marginLeft: "0.5rem",
+    fontSize: "0.875rem",
+    fontWeight: 600,
+    display: "flex",
+    alignItems: "baseline",
+  },
+  increase: {
+    color: "var(--green-accent-500)",
+  },
+  decrease: {
+    color: "var(--red-accent-500)",
+  },
+};
+
 export default function StatsGrid({ stats }: StatsGridProps) {
   return (
     <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 mb-8">
@@ -30,20 +58,17 @@ export default function StatsGrid({ stats }: StatsGridProps) {
               </div>
               <div className="ml-5 w-0 flex-1">
                 <dl>
-                  <dt className="truncate text-sm font-medium text-muted-foreground">
-                    {stat.name}
-                  </dt>
+                  <dt style={styles.statName}>{stat.name}</dt>
                   <dd>
                     <div className="flex items-baseline">
-                      <p className="text-2xl font-semibold text-foreground">
-                        {stat.amount}
-                      </p>
+                      <p style={styles.statAmount}>{stat.amount}</p>
                       <p
-                        className={`ml-2 flex items-baseline text-sm font-semibold ${
-                          stat.changeType === "increase"
-                            ? "text-green-accent-600 dark:text-green-accent-400"
-                            : "text-red-accent-600 dark:text-red-accent-400"
-                        }`}
+                        style={{
+                          ...styles.statChange,
+                          ...(stat.changeType === "increase"
+                            ? styles.increase
+                            : styles.decrease),
+                        }}
                       >
                         {stat.change}
                       </p>
