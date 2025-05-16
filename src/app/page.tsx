@@ -21,6 +21,10 @@ import {
   Cell,
 } from "recharts";
 import TransferModal from "./components/TransferModal";
+import SendMoneyModal from "./components/SendMoneyModal";
+import RequestMoneyModal from "./components/RequestMoneyModal";
+import AnalyticsModal from "./components/AnalyticsModal";
+import ThemeToggle from "./components/ThemeToggle";
 import TransactionFilters from "./components/TransactionFilters";
 
 const stats = [
@@ -101,6 +105,9 @@ const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#8884D8"];
 
 export default function Home() {
   const [isTransferModalOpen, setIsTransferModalOpen] = useState(false);
+  const [isSendMoneyModalOpen, setIsSendMoneyModalOpen] = useState(false);
+  const [isRequestMoneyModalOpen, setIsRequestMoneyModalOpen] = useState(false);
+  const [isAnalyticsModalOpen, setIsAnalyticsModalOpen] = useState(false);
   const [dateFrom, setDateFrom] = useState("");
   const [dateTo, setDateTo] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
@@ -123,9 +130,9 @@ export default function Home() {
   }, [selectedCategory, dateFrom, dateTo]);
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-background text-foreground">
       {/* Header */}
-      <header className="bg-white dark:bg-gray-800 shadow">
+      <header className="bg-card text-card-foreground shadow">
         <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
           <h1 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white">
             Dashboard
@@ -139,7 +146,7 @@ export default function Home() {
           {stats.map((stat) => (
             <div
               key={stat.id}
-              className="bg-white dark:bg-gray-800 overflow-hidden rounded-lg shadow"
+              className="bg-card text-card-foreground overflow-hidden rounded-lg shadow"
             >
               <div className="p-5">
                 <div className="flex items-center">
@@ -179,19 +186,25 @@ export default function Home() {
         </div>
 
         {/* Quick Actions */}
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow mb-8">
+        <div className="bg-card text-card-foreground rounded-lg shadow mb-8">
           <div className="p-6">
             <h2 className="text-lg font-medium text-gray-900 dark:text-white mb-4">
               Quick Actions
             </h2>
             <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
-              <button className="flex flex-col items-center justify-center p-4 rounded-lg border-2 border-gray-200 dark:border-gray-700 hover:border-blue-500 dark:hover:border-blue-500 transition-colors">
+              <button
+                onClick={() => setIsSendMoneyModalOpen(true)}
+                className="flex flex-col items-center justify-center p-4 rounded-lg border-2 border-gray-200 dark:border-gray-700 hover:border-blue-500 dark:hover:border-blue-500 transition-colors"
+              >
                 <ArrowUpIcon className="h-8 w-8 text-gray-600 dark:text-gray-400 mb-2" />
                 <span className="text-sm text-gray-600 dark:text-gray-400">
                   Send Money
                 </span>
               </button>
-              <button className="flex flex-col items-center justify-center p-4 rounded-lg border-2 border-gray-200 dark:border-gray-700 hover:border-blue-500 dark:hover:border-blue-500 transition-colors">
+              <button
+                onClick={() => setIsRequestMoneyModalOpen(true)}
+                className="flex flex-col items-center justify-center p-4 rounded-lg border-2 border-gray-200 dark:border-gray-700 hover:border-blue-500 dark:hover:border-blue-500 transition-colors"
+              >
                 <ArrowDownIcon className="h-8 w-8 text-gray-600 dark:text-gray-400 mb-2" />
                 <span className="text-sm text-gray-600 dark:text-gray-400">
                   Request Money
@@ -206,7 +219,10 @@ export default function Home() {
                   Transfer
                 </span>
               </button>
-              <button className="flex flex-col items-center justify-center p-4 rounded-lg border-2 border-gray-200 dark:border-gray-700 hover:border-blue-500 dark:hover:border-blue-500 transition-colors">
+              <button
+                onClick={() => setIsAnalyticsModalOpen(true)}
+                className="flex flex-col items-center justify-center p-4 rounded-lg border-2 border-gray-200 dark:border-gray-700 hover:border-blue-500 dark:hover:border-blue-500 transition-colors"
+              >
                 <ChartPieIcon className="h-8 w-8 text-gray-600 dark:text-gray-400 mb-2" />
                 <span className="text-sm text-gray-600 dark:text-gray-400">
                   Analytics
@@ -219,7 +235,7 @@ export default function Home() {
         {/* Charts Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
           {/* Monthly Income vs Expenses */}
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+          <div className="bg-card text-card-foreground rounded-lg shadow p-6">
             <h2 className="text-lg font-medium text-gray-900 dark:text-white mb-4">
               Income vs Expenses
             </h2>
@@ -241,7 +257,7 @@ export default function Home() {
           </div>
 
           {/* Spending Categories */}
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+          <div className="bg-card text-card-foreground rounded-lg shadow p-6">
             <h2 className="text-lg font-medium text-gray-900 dark:text-white mb-4">
               Spending by Category
             </h2>
@@ -275,7 +291,7 @@ export default function Home() {
         </div>
 
         {/* Transactions Table */}
-        <div className="bg-white dark:bg-gray-800 shadow rounded-lg">
+        <div className="bg-card text-card-foreground shadow rounded-lg">
           <div className="p-6">
             <div className="sm:flex sm:items-center">
               <div className="sm:flex-auto">
@@ -386,12 +402,29 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </main>
 
-      <TransferModal
-        isOpen={isTransferModalOpen}
-        onClose={() => setIsTransferModalOpen(false)}
-      />
+        <ThemeToggle />
+
+        {/* Modals */}
+        <TransferModal
+          isOpen={isTransferModalOpen}
+          onClose={() => setIsTransferModalOpen(false)}
+        />
+        <SendMoneyModal
+          isOpen={isSendMoneyModalOpen}
+          onClose={() => setIsSendMoneyModalOpen(false)}
+        />
+        <RequestMoneyModal
+          isOpen={isRequestMoneyModalOpen}
+          onClose={() => setIsRequestMoneyModalOpen(false)}
+        />
+        <AnalyticsModal
+          isOpen={isAnalyticsModalOpen}
+          onClose={() => setIsAnalyticsModalOpen(false)}
+          monthlyData={monthlyData}
+          spendingData={spendingData}
+        />
+      </main>
     </div>
   );
 }
