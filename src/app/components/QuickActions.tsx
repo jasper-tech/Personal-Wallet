@@ -1,3 +1,5 @@
+"use client";
+
 import {
   ArrowsRightLeftIcon,
   ArrowUpIcon,
@@ -5,13 +7,7 @@ import {
   ChartBarIcon,
 } from "@heroicons/react/24/outline";
 import { useState } from "react";
-
-interface QuickActionsProps {
-  onTransfer: () => void;
-  onSend: () => void;
-  onRequest: () => void;
-  onAnalytics: () => void;
-}
+import { useRouter } from "next/navigation";
 
 const styles = {
   buttonBase: {
@@ -61,13 +57,9 @@ const styles = {
   },
 };
 
-export default function QuickActions({
-  onTransfer,
-  onSend,
-  onRequest,
-  onAnalytics,
-}: QuickActionsProps) {
+export default function QuickActions() {
   const [hoveredId, setHoveredId] = useState<string | null>(null);
+  const router = useRouter();
 
   const actions = [
     {
@@ -75,7 +67,7 @@ export default function QuickActions({
       name: "Transfer",
       description: "Transfer between accounts",
       icon: ArrowsRightLeftIcon,
-      onClick: onTransfer,
+      route: "/transfer",
       baseStyle: { ...styles.buttonBase, ...styles.blueButton },
       hoverStyle: { ...styles.buttonHovered, ...styles.blueButtonHover },
       textStyle: styles.blueText,
@@ -86,7 +78,7 @@ export default function QuickActions({
       name: "Send",
       description: "Send money to someone",
       icon: ArrowUpIcon,
-      onClick: onSend,
+      route: "/Dashboard/send-money",
       baseStyle: { ...styles.buttonBase, ...styles.greenButton },
       hoverStyle: { ...styles.buttonHovered, ...styles.greenButtonHover },
       textStyle: styles.greenText,
@@ -97,7 +89,7 @@ export default function QuickActions({
       name: "Request",
       description: "Request money from someone",
       icon: ArrowDownIcon,
-      onClick: onRequest,
+      route: "/request-money",
       baseStyle: { ...styles.buttonBase, ...styles.redButton },
       hoverStyle: { ...styles.buttonHovered, ...styles.redButtonHover },
       textStyle: styles.redText,
@@ -108,7 +100,7 @@ export default function QuickActions({
       name: "Analytics",
       description: "View detailed analytics",
       icon: ChartBarIcon,
-      onClick: onAnalytics,
+      route: "/analytics",
       baseStyle: { ...styles.buttonBase, ...styles.yellowButton },
       hoverStyle: { ...styles.buttonHovered, ...styles.yellowButtonHover },
       textStyle: styles.yellowText,
@@ -116,12 +108,16 @@ export default function QuickActions({
     },
   ];
 
+  const handleNavigation = (route: string) => {
+    router.push(route);
+  };
+
   return (
     <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
       {actions.map((action) => (
         <button
           key={action.id}
-          onClick={action.onClick}
+          onClick={() => handleNavigation(action.route)}
           onMouseEnter={() => setHoveredId(action.id)}
           onMouseLeave={() => setHoveredId(null)}
           className={`relative flex items-center space-x-3 rounded-lg px-6 py-5 focus:outline-none`}
@@ -136,7 +132,7 @@ export default function QuickActions({
           </div>
           <div className="min-w-0 flex-1">
             <span className="absolute inset-0" aria-hidden="true" />
-            <p className="text-sm font-medium" style={action.textStyle}>
+            <p className="text-sm font-bold" style={action.textStyle}>
               {action.name}
             </p>
             <p className="text-sm text-muted-foreground">
