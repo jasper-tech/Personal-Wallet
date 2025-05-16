@@ -8,6 +8,35 @@ interface TransactionFiltersProps {
   onCategoryChange: (category: string) => void;
 }
 
+const styles = {
+  formLabel: {
+    fontSize: "0.875rem",
+    fontWeight: 500,
+    marginBottom: "0.5rem",
+    display: "block",
+    color: "var(--foreground)",
+  },
+  formInput: {
+    width: "100%",
+    borderRadius: "0.375rem",
+    borderWidth: "1px",
+    borderColor: "var(--border)",
+    backgroundColor: "var(--background)",
+    color: "var(--foreground)",
+    padding: "0.5rem 0.75rem",
+    fontSize: "0.875rem",
+    boxShadow: "0 1px 2px 0 rgba(0, 0, 0, 0.05)",
+    marginTop: "0.25rem",
+    outline: "none",
+  },
+  filterContainer: {
+    display: "grid",
+    gridTemplateColumns: "repeat(1, minmax(0, 1fr))",
+    gap: "1rem",
+    marginTop: "1.5rem",
+  },
+};
+
 export default function TransactionFilters({
   dateFrom,
   dateTo,
@@ -18,12 +47,9 @@ export default function TransactionFilters({
   onCategoryChange,
 }: TransactionFiltersProps) {
   return (
-    <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-3">
+    <div style={styles.filterContainer} className="sm:grid-cols-3">
       <div>
-        <label
-          htmlFor="date-from"
-          className="block text-sm font-medium text-gray-700 dark:text-gray-300"
-        >
+        <label htmlFor="date-from" style={styles.formLabel}>
           Date From
         </label>
         <input
@@ -32,15 +58,13 @@ export default function TransactionFilters({
           name="date-from"
           value={dateFrom}
           onChange={(e) => onDateFromChange(e.target.value)}
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+          style={styles.formInput}
+          className="focus:ring-2 focus:ring-primary focus:border-primary transition-colors"
         />
       </div>
 
       <div>
-        <label
-          htmlFor="date-to"
-          className="block text-sm font-medium text-gray-700 dark:text-gray-300"
-        >
+        <label htmlFor="date-to" style={styles.formLabel}>
           Date To
         </label>
         <input
@@ -49,15 +73,13 @@ export default function TransactionFilters({
           name="date-to"
           value={dateTo}
           onChange={(e) => onDateToChange(e.target.value)}
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+          style={styles.formInput}
+          className="focus:ring-2 focus:ring-primary focus:border-primary transition-colors"
         />
       </div>
 
       <div>
-        <label
-          htmlFor="category"
-          className="block text-sm font-medium text-gray-700 dark:text-gray-300"
-        >
+        <label htmlFor="category" style={styles.formLabel}>
           Category
         </label>
         <select
@@ -65,7 +87,8 @@ export default function TransactionFilters({
           name="category"
           value={selectedCategory}
           onChange={(e) => onCategoryChange(e.target.value)}
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+          style={styles.formInput}
+          className="focus:ring-2 focus:ring-primary focus:border-primary transition-colors"
         >
           <option value="">All Categories</option>
           {categories.map((category) => (

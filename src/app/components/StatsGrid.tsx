@@ -19,7 +19,7 @@ const styles = {
     color: "var(--blue-accent-500)",
   },
   statName: {
-    fontSize: "0.875rem",
+    fontSize: "1.5rem",
     fontWeight: 700,
     whiteSpace: "nowrap",
     overflow: "hidden",
