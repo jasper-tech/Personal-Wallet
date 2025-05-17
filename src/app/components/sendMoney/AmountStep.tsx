@@ -12,21 +12,16 @@ export const AmountStep = ({
   setNote,
 }: AmountStepProps) => (
   <div className="space-y-6">
-    <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
-      How much would you like to send?
-    </h2>
+    <h2 className="text-lg font-bold">How much would you like to send?</h2>
 
     <div className="space-y-4">
       <div>
-        <label
-          htmlFor="amount"
-          className="block text-sm font-medium text-gray-700 dark:text-gray-300"
-        >
+        <label htmlFor="amount" className="block text-base font-bold mb-1">
           Amount
         </label>
         <div className="mt-1 relative rounded-md shadow-sm">
           <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-            <span className="text-gray-500 sm:text-sm">$</span>
+            <span className="text-gray-500 text-base">₵</span>
           </div>
           <input
             type="number"
@@ -34,7 +29,7 @@ export const AmountStep = ({
             id="amount"
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
-            className="pl-7 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+            className="pl-7 block w-full rounded-md border-gray-300 shadow-sm text-base py-3 px-4 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:placeholder-gray-300"
             placeholder="0.00"
             min="0.01"
             step="0.01"
@@ -43,11 +38,8 @@ export const AmountStep = ({
       </div>
 
       <div>
-        <label
-          htmlFor="note"
-          className="block text-sm font-medium text-gray-700 dark:text-gray-300"
-        >
-          Add a note (optional)
+        <label htmlFor="note" className="block text-base font-medium  mb-1">
+          Reference (optional)
         </label>
         <textarea
           id="note"
@@ -55,8 +47,8 @@ export const AmountStep = ({
           rows={3}
           value={note}
           onChange={(e) => setNote(e.target.value)}
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-          placeholder="Add a message to the recipient"
+          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm text-base py-2 px-3 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:placeholder-gray-300"
+          placeholder="Add a reference message for this transaction"
         />
       </div>
     </div>

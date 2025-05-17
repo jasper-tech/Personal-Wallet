@@ -11,7 +11,7 @@ export const TransferMethodStep = ({
   setTransferMethod,
 }: TransferMethodStepProps) => (
   <div className="space-y-6">
-    <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+    <h2 className="text-sm font-semibold ">
       How would you like to send money?
     </h2>
     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
