@@ -1,5 +1,7 @@
 "use client";
 import React, { useState } from "react";
+import { ArrowLeft } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 import { mockAccounts } from "@/app/data/Transfer/mockData";
 import { mockTransactions } from "@/app/data/Transfer/mockData";
@@ -11,7 +13,6 @@ import {
 } from "@/app/components/TransferMoney/AmountInput";
 import { TransferSummary } from "@/app/components/TransferMoney/TransferSummary";
 import { TransferConfirmation } from "@/app/components/TransferMoney/TransferConfirmation";
-// import { TransactionsList } from "@/app/components/TransferMoney/TransferList";
 import {
   validateTransfer,
   generateTransactionId,
@@ -41,11 +42,11 @@ export default function TransferMoney() {
     amount: "",
   });
 
-  // Process state
   const [currentStep, setCurrentStep] = useState(1);
   const [isTransferComplete, setIsTransferComplete] = useState(false);
   const [transactionId, setTransactionId] = useState("");
   const [transferDate, setTransferDate] = useState<Date>(new Date());
+  const router = useRouter();
 
   // Data state
   const [accounts, setAccounts] = useState<BankAccount[]>(mockAccounts);
@@ -142,6 +143,8 @@ export default function TransferMoney() {
   const goToPreviousStep = () => {
     if (currentStep > 1) {
       setCurrentStep(currentStep - 1);
+    } else {
+      router.push("/");
     }
   };
 
@@ -155,9 +158,15 @@ export default function TransferMoney() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-6 bg-white dark:bg-gray-900 rounded-xl shadow-lg">
-      <h1 className="text-2xl font-bold mb-6">Transfer Money</h1>
-
+    <div className="max-w-3xl mx-auto p-6 rounded-xl shadow-lg">
+      <div className="flex items-center mb-6">
+        <button
+          onClick={goToPreviousStep}
+          className="mr-4 p-2 rounded-full hover:bg-[var(--muted)] transition-colors"
+        >
+          <ArrowLeft className="h-5 w-5 text-[var(--muted-foreground)]" />
+        </button>
+      </div>
       {!isTransferComplete ? (
         <>
           <StepIndicator currentStep={currentStep} steps={steps} />

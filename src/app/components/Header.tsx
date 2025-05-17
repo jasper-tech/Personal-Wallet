@@ -6,7 +6,7 @@ import ThemeToggle from "./ThemeToggle";
 const getTitleFromPath = (pathname: string): string => {
   if (pathname === "/") return "Dashboard";
   if (pathname.includes("/send-money")) return "Send Money";
-  if (pathname.includes("/transactions")) return "Transactions";
+  if (pathname.includes("/transfer")) return "Transactions";
 
   return "App";
 };

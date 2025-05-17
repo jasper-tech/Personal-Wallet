@@ -26,7 +26,7 @@ export const TransferConfirmation = ({
   const formattedAmount = isNaN(amountValue) ? "0.00" : amountValue.toFixed(2);
 
   return (
-    <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md max-w-lg mx-auto">
+    <div className=" p-6 rounded-lg border shadow-md max-w-lg mx-auto">
       <div className="flex flex-col items-center text-center mb-6">
         <div className="bg-green-100 dark:bg-green-900 p-4 rounded-full mb-4">
           <CheckCircle className="h-12 w-12 text-green-600 dark:text-green-400" />
