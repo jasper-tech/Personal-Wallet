@@ -1,3 +1,4 @@
+// Form Input component
 import React from "react";
 
 interface FormInputProps {

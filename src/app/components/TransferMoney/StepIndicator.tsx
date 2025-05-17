@@ -1,3 +1,4 @@
+//StepIndicator.tsx
 import { CheckCircle } from "lucide-react";
 
 interface StepIndicatorProps {

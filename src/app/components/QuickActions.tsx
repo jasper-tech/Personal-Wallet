@@ -67,7 +67,7 @@ export default function QuickActions() {
       name: "Transfer",
       description: "Transfer between accounts",
       icon: ArrowsRightLeftIcon,
-      route: "/transfer",
+      route: "/Dashboard/transfer",
       baseStyle: { ...styles.buttonBase, ...styles.blueButton },
       hoverStyle: { ...styles.buttonHovered, ...styles.blueButtonHover },
       textStyle: styles.blueText,

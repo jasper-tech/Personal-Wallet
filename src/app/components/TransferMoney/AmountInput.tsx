@@ -1,3 +1,4 @@
+//Amount Input component
 import React from "react";
 
 interface AmountInputProps {

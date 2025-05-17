@@ -29,3 +29,8 @@ export type AccountErrors = {
   amount?: string;
   general?: string;
 };
+export interface TransferFormErrors {
+  fromAccount: string;
+  toAccount: string;
+  amount: string;
+}
