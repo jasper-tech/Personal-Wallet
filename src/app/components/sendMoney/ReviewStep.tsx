@@ -15,9 +15,7 @@ export const ReviewStep = ({
   note,
 }: ReviewStepProps) => (
   <div className="space-y-6">
-    <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
-      Review and confirm your transfer
-    </h2>
+    <h2 className="text-xl font-semibold ">Review and confirm your transfer</h2>
 
     <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-6 space-y-4">
       <ReviewItem
@@ -26,7 +24,7 @@ export const ReviewStep = ({
           transferMethod === "email"
             ? "Email"
             : transferMethod === "phone"
-            ? "Phone"
+            ? "Mobile Money"
             : "Bank Transfer"
         }
       />
@@ -53,7 +51,7 @@ export const ReviewStep = ({
 
       <ReviewItem
         label="Amount"
-        value={`$${parseFloat(amount || "0").toFixed(2)}`}
+        value={`₵${parseFloat(amount || "0").toFixed(2)}`}
       />
 
       {note && (
@@ -69,7 +67,7 @@ export const ReviewStep = ({
           Total:
         </span>
         <span className="text-lg font-bold text-blue-600 dark:text-blue-400">
-          ${parseFloat(amount || "0").toFixed(2)}
+          ₵{parseFloat(amount || "0").toFixed(2)}
         </span>
       </div>
     </div>

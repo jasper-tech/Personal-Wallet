@@ -22,14 +22,14 @@ export const SuccessScreen = ({
       Money Sent Successfully!
     </h2>
     <p className="text-gray-500 dark:text-gray-400 max-w-md mx-auto">
-      Your transfer of ${parseFloat(amount || "0").toFixed(2)} to{" "}
+      Your transfer of ₵{parseFloat(amount || "0").toFixed(2)} to{" "}
       {recipientInfo.name}
       {transferMethod === "email"
         ? ` (${recipientInfo.email})`
         : transferMethod === "phone"
         ? ` (${recipientInfo.phone})`
         : ` at ${recipientInfo.bankName}`}{" "}
-      has been processed.
+      has been completed.
     </p>
 
     <div className="mt-8">

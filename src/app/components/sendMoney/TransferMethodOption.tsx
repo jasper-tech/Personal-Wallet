@@ -10,7 +10,6 @@ interface TransferMethodOptionProps {
 }
 
 export const TransferMethodOption = ({
-  //   method,
   title,
   description,
   icon,

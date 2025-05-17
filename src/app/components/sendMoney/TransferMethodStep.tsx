@@ -26,7 +26,7 @@ export const TransferMethodStep = ({
 
       <TransferMethodOption
         method="phone"
-        title="Send to Phone"
+        title="Mobile Money"
         description="Send money using recipient's phone number"
         icon={<Phone className="w-8 h-8 text-blue-600 mb-4" />}
         isSelected={transferMethod === "phone"}
