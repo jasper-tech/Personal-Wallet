@@ -4,8 +4,7 @@ import { useState, useMemo, useEffect } from "react";
 import { transactions, Transaction, stats } from "../data/mockData";
 import StatsGrid from "../components/StatsGrid";
 import QuickActions from "../components/QuickActions";
-import TransferModal from "../components/TransferModal";
-import RequestMoneyModal from "../components/RequestMoneyModal";
+
 import AnalyticsModal from "../components/AnalyticsModal";
 import TransactionFilters from "../components/TransactionFilters";
 import Charts from "../components/Charts";
@@ -40,8 +39,6 @@ const styles = {
 };
 
 export default function Dashboard() {
-  const [showTransferModal, setShowTransferModal] = useState(false);
-  const [showRequestModal, setShowRequestModal] = useState(false);
   const [showAnalyticsModal, setShowAnalyticsModal] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<string>("");
   const [dateFrom, setDateFrom] = useState<string>("");
@@ -77,18 +74,6 @@ export default function Dashboard() {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      {/* Header */}
-      {/* <header className="bg-card shadow">
-        <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center">
-            <h1 className="text-3xl font-bold tracking-tight text-foreground">
-              Dashboard
-            </h1>
-            <ThemeToggle />
-          </div>
-        </div>
-      </header> */}
-
       <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-6">
         <StatsGrid stats={stats} />
 
@@ -211,15 +196,6 @@ export default function Dashboard() {
           </div>
         </div>
 
-        <TransferModal
-          isOpen={showTransferModal}
-          onClose={() => setShowTransferModal(false)}
-        />
-
-        <RequestMoneyModal
-          isOpen={showRequestModal}
-          onClose={() => setShowRequestModal(false)}
-        />
         <AnalyticsModal
           isOpen={showAnalyticsModal}
           onClose={() => setShowAnalyticsModal(false)}

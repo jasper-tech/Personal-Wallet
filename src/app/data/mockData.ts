@@ -162,7 +162,6 @@ export const stats: StatItem[] = [
   },
 ];
 
-// Update spending data to match new categories
 export const spendingData = [
   { category: "Food", amount: 223 },
   { category: "Utility and Bills", amount: 270 },
