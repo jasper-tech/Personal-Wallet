@@ -1,4 +1,3 @@
-//TransactionsList.tsx
 import React from "react";
 import { ArrowDownLeft, ArrowUpRight } from "lucide-react";
 import { TransferHistoryItem } from "@/app/Types/transfer";

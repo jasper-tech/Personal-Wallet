@@ -1,4 +1,3 @@
-// AccountSelector.tsx
 import React from "react";
 import { FormSelect } from "./FormSelect";
 import { BankAccount } from "@/app/Types/transfer";

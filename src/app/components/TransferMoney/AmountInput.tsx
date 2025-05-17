@@ -1,4 +1,3 @@
-//Amount Input component
 import React from "react";
 
 interface AmountInputProps {
@@ -44,7 +43,6 @@ export const AmountInput = ({
   </div>
 );
 
-// Reference input component
 interface ReferenceInputProps {
   reference: string;
   onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
@@ -55,10 +53,7 @@ export const ReferenceInput = ({
   onChange,
 }: ReferenceInputProps) => (
   <div>
-    <label
-      htmlFor="reference"
-      className="block text-base font-medium text-gray-700 dark:text-gray-300 mb-1"
-    >
+    <label htmlFor="reference" className="block text-base font-medium  mb-1">
       Reference (optional)
     </label>
     <textarea
@@ -67,7 +62,7 @@ export const ReferenceInput = ({
       rows={3}
       value={reference}
       onChange={onChange}
-      className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-base py-2 px-3 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:placeholder-gray-300"
+      className="mt-1 block w-full rounded-md border-gray-300 shadow-sm  text-base py-2 px-3 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:placeholder-gray-300"
       placeholder="Add a reference message for this transaction"
     />
   </div>

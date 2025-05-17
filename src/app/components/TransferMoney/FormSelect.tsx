@@ -1,4 +1,3 @@
-// Form Select component
 import React from "react";
 
 interface FormSelectProps {
