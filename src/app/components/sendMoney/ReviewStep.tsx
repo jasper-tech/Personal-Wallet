@@ -15,7 +15,7 @@ export const ReviewStep = ({
   note,
 }: ReviewStepProps) => (
   <div className="space-y-6">
-    <h2 className="text-xl font-semibold ">Review and confirm your transfer</h2>
+    <h2 className="text-md font-semibold ">Review and confirm your transfer</h2>
 
     <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-6 space-y-4">
       <ReviewItem

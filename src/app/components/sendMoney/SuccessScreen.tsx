@@ -18,10 +18,8 @@ export const SuccessScreen = ({
     <div className="inline-flex items-center justify-center rounded-full bg-green-100 p-6 dark:bg-green-900">
       <CheckCircle className="h-12 w-12 text-green-600 dark:text-green-300" />
     </div>
-    <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">
-      Money Sent Successfully!
-    </h2>
-    <p className="text-gray-500 dark:text-gray-400 max-w-md mx-auto">
+    <h2 className="text-2xl font-semibold ">Money Sent Successfully!</h2>
+    <p className="text-gray-500 max-w-md mx-auto">
       Your transfer of ₵{parseFloat(amount || "0").toFixed(2)} to{" "}
       {recipientInfo.name}
       {transferMethod === "email"

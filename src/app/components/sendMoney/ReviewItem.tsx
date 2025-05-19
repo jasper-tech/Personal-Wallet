@@ -12,7 +12,7 @@ export const ReviewItem = ({
   valueClassName = "",
 }: ReviewItemProps) => (
   <div className="flex justify-between pb-3 border-b border-gray-200 dark:border-gray-700">
-    <span className="text-gray-500 dark:text-gray-400">{label}:</span>
+    <span className="text-white dark:text-shadow-white ">{label}:</span>
     <span
       className={`font-medium text-gray-900 dark:text-white ${valueClassName}`}
     >

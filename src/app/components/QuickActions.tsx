@@ -76,7 +76,7 @@ export default function QuickActions() {
     {
       id: "send",
       name: "Send",
-      description: "Send money to someone",
+      description: "Send money to a recipient",
       icon: ArrowUpIcon,
       route: "/Dashboard/send-money",
       baseStyle: { ...styles.buttonBase, ...styles.greenButton },

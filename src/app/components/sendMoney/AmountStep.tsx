@@ -12,11 +12,11 @@ export const AmountStep = ({
   setNote,
 }: AmountStepProps) => (
   <div className="space-y-6">
-    <h2 className="text-lg font-bold">How much would you like to send?</h2>
+    <h2 className="text-sm font-semibold">How much would you like to send?</h2>
 
     <div className="space-y-4">
       <div>
-        <label htmlFor="amount" className="block text-base font-bold mb-1">
+        <label htmlFor="amount" className="block text-sm  mb-1">
           Amount
         </label>
         <div className="mt-1 relative rounded-md shadow-sm">
@@ -38,7 +38,7 @@ export const AmountStep = ({
       </div>
 
       <div>
-        <label htmlFor="note" className="block text-base font-medium  mb-1">
+        <label htmlFor="note" className="block text-sm   mb-1">
           Reference (optional)
         </label>
         <textarea

@@ -18,7 +18,7 @@ export const FormInput = ({
   error,
 }: FormInputProps) => (
   <div>
-    <label htmlFor={id} className="block text-base font-semibold mb-1">
+    <label htmlFor={id} className="block text-sm  mb-1">
       {label}
     </label>
     <input
@@ -27,7 +27,7 @@ export const FormInput = ({
       id={id}
       value={value}
       onChange={onChange}
-      className="mt-1 block w-full rounded-md border-gray-300 shadow-sm  text-base py-3 px-4 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:placeholder-gray-300 placeholder-opacity-70"
+      className="mt-1 block w-full rounded-md border-gray-300 shadow-sm  text-sm py-3 px-4 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:placeholder-gray-300 placeholder-opacity-70"
       placeholder={placeholder}
     />
     {error && <p className="mt-1 text-sm text-red-600">{error}</p>}
