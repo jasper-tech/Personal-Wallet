@@ -1,16 +1,20 @@
 "use client";
 
 import { useState } from "react";
-import { Calendar, Filter, X } from "lucide-react";
+import { Calendar, Filter, X, Coins } from "lucide-react";
 
 interface TransactionFiltersProps {
   dateFrom: string;
   dateTo: string;
   selectedCategory: string;
   categories: string[];
+  amountMin: string;
+  amountMax: string;
   onDateFromChange: (date: string) => void;
   onDateToChange: (date: string) => void;
   onCategoryChange: (category: string) => void;
+  onAmountMinChange: (amount: string) => void;
+  onAmountMaxChange: (amount: string) => void;
 }
 
 export default function TransactionFilters({
@@ -18,9 +22,13 @@ export default function TransactionFilters({
   dateTo,
   selectedCategory,
   categories,
+  amountMin,
+  amountMax,
   onDateFromChange,
   onDateToChange,
   onCategoryChange,
+  onAmountMinChange,
+  onAmountMaxChange,
 }: TransactionFiltersProps) {
   const [isExpanded, setIsExpanded] = useState(false);
 
@@ -28,14 +36,16 @@ export default function TransactionFilters({
     dateFrom !== "",
     dateTo !== "",
     selectedCategory !== "",
+    amountMin !== "",
+    amountMax !== "",
   ].filter(Boolean).length;
 
   return (
-    <div className=" rounded-lg  p-4 mb-2">
+    <div className="rounded-lg p-4 mb-2">
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center space-x-2">
           <Filter className="h-5 w-5 text-indigo-500" />
-          <h3 className="font-medium">Filters</h3>
+          <h3 className="font-medium text-sm">Filters</h3>
           {activeFiltersCount > 0 && (
             <span className="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-indigo-100 bg-indigo-600 rounded-full">
               {activeFiltersCount}
@@ -88,6 +98,30 @@ export default function TransactionFilters({
               </button>
             </div>
           )}
+
+          {amountMin && (
+            <div className="inline-flex items-center px-3 py-1 rounded-full text-sm bg-indigo-50 text-indigo-700 dark:bg-indigo-900 dark:text-indigo-200">
+              <span className="mr-1">Min: ₵{amountMin}</span>
+              <button
+                onClick={() => onAmountMinChange("")}
+                className="ml-1 text-indigo-500 hover:text-indigo-700 dark:text-indigo-300 dark:hover:text-indigo-100"
+              >
+                <X className="h-3 w-3" />
+              </button>
+            </div>
+          )}
+
+          {amountMax && (
+            <div className="inline-flex items-center px-3 py-1 rounded-full text-sm bg-indigo-50 text-indigo-700 dark:bg-indigo-900 dark:text-indigo-200">
+              <span className="mr-1">Max: ₵{amountMax}</span>
+              <button
+                onClick={() => onAmountMaxChange("")}
+                className="ml-1 text-indigo-500 hover:text-indigo-700 dark:text-indigo-300 dark:hover:text-indigo-100"
+              >
+                <X className="h-3 w-3" />
+              </button>
+            </div>
+          )}
         </div>
       )}
 
@@ -122,7 +156,7 @@ export default function TransactionFilters({
             </label>
             <div className="relative">
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <Calendar className="h-4 w-4" />
+                <Calendar className="h-4 w-4 text-gray-400" />
               </div>
               <input
                 type="date"
@@ -138,7 +172,7 @@ export default function TransactionFilters({
           <div>
             <label
               htmlFor="category"
-              className="block text-sm font-medium  mb-1"
+              className="block text-sm font-medium mb-1"
             >
               Category
             </label>
@@ -156,6 +190,52 @@ export default function TransactionFilters({
                 </option>
               ))}
             </select>
+          </div>
+
+          <div className="relative">
+            <label
+              htmlFor="amount-min"
+              className="block text-sm font-medium mb-1"
+            >
+              Min Amount (₵)
+            </label>
+            <div className="relative">
+              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <Coins className="h-4 w-4 text-gray-400" />
+              </div>
+              <input
+                type="number"
+                id="amount-min"
+                name="amount-min"
+                value={amountMin}
+                onChange={(e) => onAmountMinChange(e.target.value)}
+                placeholder="0"
+                className="pl-10 block w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm dark:bg-gray-700 dark:text-white"
+              />
+            </div>
+          </div>
+
+          <div className="relative">
+            <label
+              htmlFor="amount-max"
+              className="block text-sm font-medium mb-1"
+            >
+              Max Amount (₵)
+            </label>
+            <div className="relative">
+              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <Coins className="h-4 w-4 text-gray-400" />
+              </div>
+              <input
+                type="number"
+                id="amount-max"
+                name="amount-max"
+                value={amountMax}
+                onChange={(e) => onAmountMaxChange(e.target.value)}
+                placeholder="1000"
+                className="pl-10 block w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm dark:bg-gray-700 dark:text-white"
+              />
+            </div>
           </div>
         </div>
       )}
@@ -203,6 +283,8 @@ export default function TransactionFilters({
                 onDateFromChange("");
                 onDateToChange("");
                 onCategoryChange("");
+                onAmountMinChange("");
+                onAmountMaxChange("");
               }}
               className="px-3 py-1 bg-rose-50 hover:bg-rose-100 dark:bg-rose-900 dark:hover:bg-rose-800 rounded-md text-sm font-medium text-rose-700 dark:text-rose-300 transition-colors"
             >

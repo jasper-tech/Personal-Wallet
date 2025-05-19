@@ -93,8 +93,8 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
                           }
                         >
                           {transaction.amount >= 0
-                            ? `+$${transaction.amount.toFixed(2)}`
-                            : `-$${Math.abs(transaction.amount).toFixed(2)}`}
+                            ? `+₵${transaction.amount.toFixed(2)}`
+                            : `-₵${Math.abs(transaction.amount).toFixed(2)}`}
                         </td>
                         <td className="whitespace-nowrap px-3 py-4 text-sm">
                           <span

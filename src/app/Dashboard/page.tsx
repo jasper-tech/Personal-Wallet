@@ -4,27 +4,46 @@ import { useState, useMemo, useEffect } from "react";
 import { transactions, Transaction, stats } from "../data/mockData";
 import StatsGrid from "../components/StatsGrid";
 import QuickActions from "../components/QuickActions";
-import AnalyticsModal from "../components/AnalyticsModal";
 import TransactionFilters from "../components/TransactionFilters";
 import TransactionTable from "../components/TransactionTable";
 
 export default function Dashboard() {
-  const [showAnalyticsModal, setShowAnalyticsModal] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<string>("");
   const [dateFrom, setDateFrom] = useState<string>("");
   const [dateTo, setDateTo] = useState<string>("");
+  const [amountMin, setAmountMin] = useState<string>("");
+  const [amountMax, setAmountMax] = useState<string>("");
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6;
 
   const filteredTransactions = useMemo(() => {
     return transactions.filter((transaction: Transaction) => {
+      // Category filter
       const matchesCategory =
         !selectedCategory || transaction.category === selectedCategory;
+
+      // Date filters
       const matchesDateFrom = !dateFrom || transaction.date >= dateFrom;
       const matchesDateTo = !dateTo || transaction.date <= dateTo;
-      return matchesCategory && matchesDateFrom && matchesDateTo;
+
+      // Amount filters
+      const transactionAmount = parseFloat(
+        transaction.amount.toString().replace(/[₵,]/g, "")
+      );
+      const matchesAmountMin =
+        !amountMin || transactionAmount >= parseFloat(amountMin);
+      const matchesAmountMax =
+        !amountMax || transactionAmount <= parseFloat(amountMax);
+
+      return (
+        matchesCategory &&
+        matchesDateFrom &&
+        matchesDateTo &&
+        matchesAmountMin &&
+        matchesAmountMax
+      );
     });
-  }, [selectedCategory, dateFrom, dateTo]);
+  }, [selectedCategory, dateFrom, dateTo, amountMin, amountMax]);
 
   // Pagination calculations
   const totalPages = Math.ceil(filteredTransactions.length / itemsPerPage);
@@ -40,7 +59,7 @@ export default function Dashboard() {
 
   useEffect(() => {
     setCurrentPage(1);
-  }, [selectedCategory, dateFrom, dateTo]);
+  }, [selectedCategory, dateFrom, dateTo, amountMin, amountMax]);
 
   const handlePreviousPage = () => {
     setCurrentPage((prev) => Math.max(prev - 1, 1));
@@ -71,9 +90,13 @@ export default function Dashboard() {
             selectedCategory={selectedCategory}
             dateFrom={dateFrom}
             dateTo={dateTo}
+            amountMin={amountMin}
+            amountMax={amountMax}
             onCategoryChange={setSelectedCategory}
             onDateFromChange={setDateFrom}
             onDateToChange={setDateTo}
+            onAmountMinChange={setAmountMin}
+            onAmountMaxChange={setAmountMax}
             categories={categories}
           />
 
@@ -85,12 +108,6 @@ export default function Dashboard() {
             onNextPage={handleNextPage}
           />
         </div>
-
-        <AnalyticsModal
-          isOpen={showAnalyticsModal}
-          onClose={() => setShowAnalyticsModal(false)}
-          transactions={filteredTransactions}
-        />
       </main>
     </div>
   );
