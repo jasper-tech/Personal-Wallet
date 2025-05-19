@@ -93,7 +93,7 @@ export const TransferConfirmation = ({
           onClick={handleClose}
           className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-md transition-colors"
         >
-          Return to Dashboard
+          Done
         </button>
       </div>
     </div>

@@ -16,24 +16,20 @@ const BankAccountSelection: React.FC<BankAccountSelectionProps> = ({
 }) => {
   return (
     <div className="space-y-6">
-      <h2 className="text-xl font-semibold">Select Bank Account</h2>
+      <h2 className="text-md font-semibold">Select Bank Account</h2>
       <div className="space-y-4">
         {accounts.map((account) => (
           <div
             key={account.id}
             className={`p-4 border rounded-lg cursor-pointer transition-colors
-              ${
-                selectedAccount === account.id
-                  ? "border-blue-500 bg-blue-50 dark:bg-blue-900/20"
-                  : "border-gray-200 hover:border-gray-300 dark:border-gray-700"
-              }`}
+             `}
             onClick={() => onAccountChange(account.id)}
           >
             <div className="flex items-start">
               <div
                 className={`w-5 h-5 rounded-full flex-shrink-0 border mt-1 ${
                   selectedAccount === account.id
-                    ? "border-blue-600 bg-blue-600"
+                    ? "border-blue-900 bg-blue-900"
                     : "border-gray-300"
                 }`}
               >
@@ -52,7 +48,7 @@ const BankAccountSelection: React.FC<BankAccountSelectionProps> = ({
                     })}
                   </span>
                 </div>
-                <p className="text-sm text-gray-600 dark:text-gray-300">
+                <p className="text-sm text-gray-700">
                   Account: **** {account.accountNumber.slice(-4)}
                 </p>
                 {account.branch && (

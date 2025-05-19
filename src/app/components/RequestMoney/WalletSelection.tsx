@@ -54,9 +54,7 @@ const WalletSelection: React.FC<WalletSelectionProps> = ({
                     })}
                   </span>
                 </div>
-                <p className="text-sm text-gray-600 dark:text-gray-300">
-                  Personal Wallet
-                </p>
+                <p className="text-sm text-gray-700">Personal Wallet</p>
               </div>
             </div>
           </div>

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { BankAccount } from "@/app/Types/requestMoney";
+import { Loader2 } from "lucide-react";
 
 interface AmountInputProps {
   amount: string;
@@ -17,13 +18,23 @@ const AmountInput: React.FC<AmountInputProps> = ({
   onBack,
 }) => {
   const [note, setNote] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    // Only allow numbers and one decimal point
+    // allow numbers and one decimal point
     if (/^\d*\.?\d{0,2}$/.test(value) || value === "") {
       onAmountChange(value);
     }
+  };
+
+  const handleSubmit = () => {
+    setIsSubmitting(true);
+
+    setTimeout(() => {
+      setIsSubmitting(false);
+      onSubmit();
+    }, 2000);
   };
 
   const isAmountValid =
@@ -33,11 +44,11 @@ const AmountInput: React.FC<AmountInputProps> = ({
 
   return (
     <div className="space-y-6">
-      <h2 className="text-xl font-semibold">Enter Amount</h2>
+      <h2 className="text-lg font-semibold">Enter Amount</h2>
 
       {selectedBankAccount && (
-        <div className="p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
-          <p className="text-sm text-blue-800 dark:text-blue-200">
+        <div className="p-3 border rounded-lg">
+          <p className="text-sm text-green-700">
             Available Balance:{" "}
             <span className="font-semibold">
               GH₵{" "}
@@ -52,10 +63,7 @@ const AmountInput: React.FC<AmountInputProps> = ({
 
       <div className="space-y-4">
         <div>
-          <label
-            htmlFor="amount"
-            className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
-          >
+          <label htmlFor="amount" className="block text-sm font-bold mb-1">
             Amount
           </label>
           <div className="relative mt-1">
@@ -83,11 +91,8 @@ const AmountInput: React.FC<AmountInputProps> = ({
         </div>
 
         <div>
-          <label
-            htmlFor="note"
-            className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
-          >
-            Note (Optional)
+          <label htmlFor="note" className="block text-sm font-bold mb-1">
+            Reference (Optional)
           </label>
           <textarea
             id="note"
@@ -105,15 +110,23 @@ const AmountInput: React.FC<AmountInputProps> = ({
         <button
           onClick={onBack}
           className="px-4 py-2 border border-gray-300 rounded-lg"
+          disabled={isSubmitting}
         >
           Back
         </button>
         <button
-          onClick={onSubmit}
-          disabled={!isAmountValid}
-          className="px-4 py-2 bg-blue-600 text-white rounded-lg disabled:opacity-50 disabled:cursor-not-allowed"
+          onClick={handleSubmit}
+          disabled={!isAmountValid || isSubmitting}
+          className="px-4 py-2 bg-blue-600 text-white rounded-lg disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center min-w-32"
         >
-          Request Money
+          {isSubmitting ? (
+            <>
+              <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+              Requesting...
+            </>
+          ) : (
+            "Request Money"
+          )}
         </button>
       </div>
     </div>

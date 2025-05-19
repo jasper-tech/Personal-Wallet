@@ -14,7 +14,7 @@ export const SuccessScreen = ({
   transferMethod,
   onReturnToDashboard,
 }: SuccessScreenProps) => (
-  <div className="text-center py-10 space-y-6">
+  <div className="text-center border py-10 space-y-6">
     <div className="inline-flex items-center justify-center rounded-full bg-green-100 p-6 dark:bg-green-900">
       <CheckCircle className="h-12 w-12 text-green-600 dark:text-green-300" />
     </div>
@@ -38,7 +38,7 @@ export const SuccessScreen = ({
         onClick={onReturnToDashboard}
         className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
       >
-        Return to Dashboard
+        Done
       </button>
     </div>
   </div>

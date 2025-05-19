@@ -2,7 +2,6 @@
 import React, { useState } from "react";
 import { ArrowLeft, Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
-import toast from "react-hot-toast";
 
 import { mockAccounts } from "@/app/data/Transfer/mockData";
 import { mockTransactions } from "@/app/data/Transfer/mockData";
@@ -132,12 +131,6 @@ export default function TransferMoney() {
 
       setIsProcessing(false);
       setIsTransferComplete(true);
-
-      // Show toast notification
-      toast.success("Transfer completed successfully!", {
-        duration: 4000,
-        position: "top-center",
-      });
     }, 2000);
   };
 
