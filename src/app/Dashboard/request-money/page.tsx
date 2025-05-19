@@ -1,6 +1,9 @@
 "use client";
 
 import React, { useState, useMemo } from "react";
+import { ArrowLeft } from "lucide-react";
+import { useRouter } from "next/navigation";
+
 import StepIndicator from "@/app/components/RequestMoney/StepIndicator";
 import BankAccountSelection from "@/app/components/RequestMoney/BankAccountSelection";
 import MethodSelection from "@/app/components/RequestMoney/MethodSelection";
@@ -22,6 +25,7 @@ export default function RequestMoneyPage() {
   const [selectedWalletId, setSelectedWalletId] = useState("");
   const [amount, setAmount] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const router = useRouter();
 
   // Derived state
   const selectedBank = useMemo(
@@ -62,9 +66,25 @@ export default function RequestMoneyPage() {
     setIsSubmitted(false);
   };
 
+  const goToPreviousStep = () => {
+    if (currentStep > 1) {
+      setCurrentStep(currentStep - 1);
+    } else {
+      router.push("/");
+    }
+  };
+
   return (
     <div className="min-h-screen flex items-center justify-center p-4">
-      <div className="max-w-3xl  w-full mx-auto p-6  rounded-xl shadow-md">
+      <div className="max-w-3xl w-full mx-auto p-6  rounded-xl shadow-md">
+        <div className="flex items-center mb-6">
+          <button
+            onClick={goToPreviousStep}
+            className="mr-4 p-2 rounded-full hover:bg-[var(--muted)] transition-colors"
+          >
+            <ArrowLeft className="h-5 w-5 text-[var(--muted-foreground)]" />
+          </button>
+        </div>
         {!isSubmitted ? (
           <>
             <StepIndicator currentStep={currentStep} />
