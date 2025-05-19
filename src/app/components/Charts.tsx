@@ -157,11 +157,6 @@ export default function Charts({ transactions }: ChartsProps) {
                 ))}
               </Pie>
               <Tooltip
-                contentStyle={{
-                  backgroundColor: "var(--card)",
-                  borderColor: "var(--border)",
-                  color: "var(--card-foreground)",
-                }}
                 formatter={(value: number) => [
                   `₵${value.toFixed(2)}`,
                   "Amount",
