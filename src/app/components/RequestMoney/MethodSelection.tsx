@@ -18,7 +18,7 @@ const MethodSelection: React.FC<MethodSelectionProps> = ({
 }) => {
   return (
     <div className="space-y-6">
-      <h2 className="text-xl font-semibold">Select Transfer Method</h2>
+      <h2 className="text-sm font-bold">Select Transfer Method</h2>
       <div className="space-y-4">
         {methods.map((method) => (
           <div
@@ -41,8 +41,8 @@ const MethodSelection: React.FC<MethodSelectionProps> = ({
               </div>
               <div className="ml-3">
                 <h3 className="font-medium">{method.name}</h3>
-                <p className="text-sm text-gray-700 ">{method.description}</p>
-                <p className="text-xs text-gray-500 mt-1">
+                <p className="text-sm text-gray-500 ">{method.description}</p>
+                <p className="text-xs mt-1">
                   {method.fee > 0
                     ? `Fee: GH₵ ${method.fee.toFixed(2)}`
                     : "No fee"}{" "}

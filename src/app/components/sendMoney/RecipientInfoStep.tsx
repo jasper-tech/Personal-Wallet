@@ -39,7 +39,7 @@ export const RecipientInfoStep = ({
   errors,
 }: RecipientInfoStepProps) => (
   <div className="space-y-6">
-    <h2 className="text-md font-semibold ">
+    <h2 className="text-sm font-bold ">
       {transferMethod === "email"
         ? "Enter recipient's email"
         : transferMethod === "phone"
@@ -47,7 +47,7 @@ export const RecipientInfoStep = ({
         : "Enter bank account details"}
     </h2>
 
-    <div className="space-y-4  ">
+    <div className="space-y-4 text-sm ">
       <FormInput
         id="name"
         label="Recipient's Name"

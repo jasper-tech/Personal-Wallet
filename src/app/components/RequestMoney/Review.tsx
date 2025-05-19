@@ -42,7 +42,7 @@ const Review: React.FC<ReviewProps> = ({
         </div>
 
         <h2 className="text-xl font-semibold">Request Submitted!</h2>
-        <p className="text-gray-700 text-sm px-4">
+        <p className="text-gray-500 text-sm px-4">
           Your money request has been submitted successfully.
         </p>
 
@@ -102,7 +102,7 @@ const Review: React.FC<ReviewProps> = ({
           </button>
         </div>
 
-        <div className="text-xs text-gray-700 pt-2">
+        <div className="text-xs text-gray-500 pt-2">
           Thank you for using our service!
         </div>
       </div>

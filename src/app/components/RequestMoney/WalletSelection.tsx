@@ -18,7 +18,7 @@ const WalletSelection: React.FC<WalletSelectionProps> = ({
 }) => {
   return (
     <div className="space-y-6">
-      <h2 className="text-xl font-semibold">Select Your Wallet</h2>
+      <h2 className="text-sm font-bold">Select Your Wallet</h2>
       <div className="space-y-4">
         {wallets.map((wallet) => (
           <div
@@ -54,7 +54,7 @@ const WalletSelection: React.FC<WalletSelectionProps> = ({
                     })}
                   </span>
                 </div>
-                <p className="text-sm text-gray-700">Personal Wallet</p>
+                <p className="text-sm text-gray-500">Personal Wallet</p>
               </div>
             </div>
           </div>

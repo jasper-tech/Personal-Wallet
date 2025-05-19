@@ -14,7 +14,7 @@ export const AmountInput = ({
   maxAmount,
 }: AmountInputProps) => (
   <div>
-    <label htmlFor="amount" className="block text-base font-bold mb-1">
+    <label htmlFor="amount" className="block text-sm mb-1">
       Amount
     </label>
     <div className="mt-1 relative rounded-md shadow-sm">
@@ -53,7 +53,7 @@ export const ReferenceInput = ({
   onChange,
 }: ReferenceInputProps) => (
   <div>
-    <label htmlFor="reference" className="block text-base font-medium  mb-1">
+    <label htmlFor="reference" className="block text-sm mb-1">
       Reference (optional)
     </label>
     <textarea

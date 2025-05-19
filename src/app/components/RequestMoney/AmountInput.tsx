@@ -44,11 +44,11 @@ const AmountInput: React.FC<AmountInputProps> = ({
 
   return (
     <div className="space-y-6">
-      <h2 className="text-lg font-semibold">Enter Amount</h2>
+      <h2 className="text-sm font-bold">Enter amount</h2>
 
       {selectedBankAccount && (
         <div className="p-3 border rounded-lg">
-          <p className="text-sm text-green-700">
+          <p className="text-sm text-green-600">
             Available Balance:{" "}
             <span className="font-semibold">
               GH₵{" "}
@@ -63,7 +63,7 @@ const AmountInput: React.FC<AmountInputProps> = ({
 
       <div className="space-y-4">
         <div>
-          <label htmlFor="amount" className="block text-sm font-bold mb-1">
+          <label htmlFor="amount" className="block text-sm mb-1">
             Amount
           </label>
           <div className="relative mt-1">
@@ -91,7 +91,7 @@ const AmountInput: React.FC<AmountInputProps> = ({
         </div>
 
         <div>
-          <label htmlFor="note" className="block text-sm font-bold mb-1">
+          <label htmlFor="note" className="block text-sm mb-1">
             Reference (Optional)
           </label>
           <textarea

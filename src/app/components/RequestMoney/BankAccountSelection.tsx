@@ -16,7 +16,7 @@ const BankAccountSelection: React.FC<BankAccountSelectionProps> = ({
 }) => {
   return (
     <div className="space-y-6">
-      <h2 className="text-md font-semibold">Select Bank Account</h2>
+      <h2 className="text-sm font-semibold">Select Bank Account</h2>
       <div className="space-y-4">
         {accounts.map((account) => (
           <div
@@ -48,13 +48,11 @@ const BankAccountSelection: React.FC<BankAccountSelectionProps> = ({
                     })}
                   </span>
                 </div>
-                <p className="text-sm text-gray-700">
+                <p className="text-sm text-gray-500">
                   Account: **** {account.accountNumber.slice(-4)}
                 </p>
                 {account.branch && (
-                  <p className="text-xs text-gray-500">
-                    Branch: {account.branch}
-                  </p>
+                  <p className="text-xs ">Branch: {account.branch}</p>
                 )}
               </div>
             </div>
