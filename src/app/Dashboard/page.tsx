@@ -4,39 +4,9 @@ import { useState, useMemo, useEffect } from "react";
 import { transactions, Transaction, stats } from "../data/mockData";
 import StatsGrid from "../components/StatsGrid";
 import QuickActions from "../components/QuickActions";
-
 import AnalyticsModal from "../components/AnalyticsModal";
 import TransactionFilters from "../components/TransactionFilters";
-import Charts from "../components/Charts";
-
-const styles = {
-  positiveAmount: {
-    color: "var(--green-accent-500)",
-  },
-  negativeAmount: {
-    color: "var(--red-accent-500)",
-  },
-  statusCompleted: {
-    backgroundColor: "var(--green-accent-100)",
-    color: "var(--green-accent-600)",
-    borderRadius: "9999px",
-    padding: "0.25rem 0.625rem",
-    fontSize: "0.75rem",
-    fontWeight: 500,
-    display: "inline-flex",
-    alignItems: "center",
-  },
-  statusPending: {
-    backgroundColor: "var(--yellow-accent-100)",
-    color: "var(--warning)",
-    borderRadius: "9999px",
-    padding: "0.25rem 0.625rem",
-    fontSize: "0.75rem",
-    fontWeight: 500,
-    display: "inline-flex",
-    alignItems: "center",
-  },
-};
+import TransactionTable from "../components/TransactionTable";
 
 export default function Dashboard() {
   const [showAnalyticsModal, setShowAnalyticsModal] = useState(false);
@@ -63,7 +33,7 @@ export default function Dashboard() {
     return filteredTransactions.slice(startIndex, startIndex + itemsPerPage);
   }, [filteredTransactions, currentPage]);
 
-  // unique categories
+  // categories
   const categories = useMemo(() => {
     return Array.from(new Set(transactions.map((t) => t.category)));
   }, []);
@@ -71,6 +41,14 @@ export default function Dashboard() {
   useEffect(() => {
     setCurrentPage(1);
   }, [selectedCategory, dateFrom, dateTo]);
+
+  const handlePreviousPage = () => {
+    setCurrentPage((prev) => Math.max(prev - 1, 1));
+  };
+
+  const handleNextPage = () => {
+    setCurrentPage((prev) => Math.min(prev + 1, totalPages));
+  };
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -80,20 +58,13 @@ export default function Dashboard() {
         <QuickActions />
 
         <div className="mt-8">
-          <Charts transactions={filteredTransactions} />
-        </div>
-
-        <div className="mt-8">
           <div className="sm:flex sm:items-center">
             <div className="sm:flex-auto">
-              <h2 className="text-xl font-semibold text-foreground">
+              <h2 className="text-lg font-semibold mb-4 text-foreground">
                 Recent Transactions
               </h2>
-              <p className="mt-2 text-sm text-muted-foreground">
-                A list of all your recent transactions including their date,
-                description and amount.
-              </p>
             </div>
+            <div className="mt-4 sm:ml-16 sm:mt-0 sm:flex-none"></div>
           </div>
 
           <TransactionFilters
@@ -106,94 +77,13 @@ export default function Dashboard() {
             categories={categories}
           />
 
-          <div className="mt-8">
-            <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-              <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-                <table className="min-w-full divide-y divide-border">
-                  <thead>
-                    <tr>
-                      <th className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold  sm:pl-0">
-                        Date
-                      </th>
-                      <th className="px-3 py-3.5 text-left text-sm font-semibold ">
-                        Description
-                      </th>
-                      <th className="px-3 py-3.5 text-left text-sm font-semibold ">
-                        Category
-                      </th>
-                      <th className="px-3 py-3.5 text-left text-sm font-semibold ">
-                        Amount
-                      </th>
-                      <th className="px-3 py-3.5 text-left text-sm font-semibold ">
-                        Status
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-border">
-                    {paginatedTransactions.map((transaction) => (
-                      <tr key={transaction.id}>
-                        <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-foreground sm:pl-0">
-                          {transaction.date}
-                        </td>
-                        <td className="whitespace-nowrap px-3 py-4 text-sm text-foreground">
-                          {transaction.description}
-                        </td>
-                        <td className="whitespace-nowrap px-3 py-4 text-sm text-foreground">
-                          {transaction.category}
-                        </td>
-                        <td
-                          className="whitespace-nowrap px-3 py-4 text-sm"
-                          style={
-                            transaction.amount >= 0
-                              ? styles.positiveAmount
-                              : styles.negativeAmount
-                          }
-                        >
-                          {transaction.amount >= 0
-                            ? `+$${transaction.amount.toFixed(2)}`
-                            : `-$${Math.abs(transaction.amount).toFixed(2)}`}
-                        </td>
-                        <td className="whitespace-nowrap px-3 py-4 text-sm">
-                          <span
-                            style={
-                              transaction.status === "Completed"
-                                ? styles.statusCompleted
-                                : styles.statusPending
-                            }
-                          >
-                            {transaction.status}
-                          </span>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-
-          {/* Pagination controls */}
-          <div className="mt-4 flex justify-between">
-            <button
-              onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-              disabled={currentPage === 1}
-              className="px-4 py-2 text-sm font-semibold bg-card text-foreground rounded-md shadow-sm disabled:opacity-50"
-            >
-              Previous
-            </button>
-            <span className="self-center text-sm text-muted-foreground">
-              Page {currentPage} of {totalPages}
-            </span>
-            <button
-              onClick={() =>
-                setCurrentPage((prev) => Math.min(prev + 1, totalPages))
-              }
-              disabled={currentPage === totalPages}
-              className="px-4 py-2 text-sm font-semibold bg-card text-foreground rounded-md shadow-sm disabled:opacity-50"
-            >
-              Next
-            </button>
-          </div>
+          <TransactionTable
+            transactions={paginatedTransactions}
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPreviousPage={handlePreviousPage}
+            onNextPage={handleNextPage}
+          />
         </div>
 
         <AnalyticsModal
