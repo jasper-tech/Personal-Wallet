@@ -28,8 +28,8 @@ export const TransferConfirmation = ({
   const formattedAmount = isNaN(amountValue) ? "0.00" : amountValue.toFixed(2);
 
   const handleClose = () => {
-    onClose(); // Keep the original onClose functionality
-    router.push("/"); // Navigate to the homepage
+    onClose();
+    router.push("/");
   };
 
   return (
@@ -93,7 +93,7 @@ export const TransferConfirmation = ({
           onClick={handleClose}
           className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-md transition-colors"
         >
-          Done
+          Return to Dashboard
         </button>
       </div>
     </div>

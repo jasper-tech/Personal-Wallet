@@ -95,7 +95,6 @@ export default function TransferMoney() {
   const processTransfer = () => {
     setIsProcessing(true);
 
-    // Simulate processing time
     setTimeout(() => {
       // Generate a transaction ID
       const newTransactionId = generateTransactionId();
@@ -139,7 +138,7 @@ export default function TransferMoney() {
         duration: 4000,
         position: "top-center",
       });
-    }, 2000); // Simulate a 2-second processing time
+    }, 2000);
   };
 
   // Navigation
