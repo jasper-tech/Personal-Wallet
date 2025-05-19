@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 
 import { mockAccounts } from "@/app/data/Transfer/mockData";
 import { mockTransactions } from "@/app/data/Transfer/mockData";
-import { StepIndicator } from "@/app/components/sendMoney/StepIndicator";
+import { StepIndicator } from "@/app/components/SendMoney/StepIndicator";
 import { AccountSelector } from "@/app/components/TransferMoney/AccountSelector";
 import {
   AmountInput,

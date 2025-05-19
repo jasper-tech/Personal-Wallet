@@ -5,13 +5,13 @@ import { ArrowLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 import { RecipientInfo, Errors } from "../../Types/sendMoney";
-import { StepIndicator } from "../../components/sendMoney/StepIndicator";
-import { TransferMethodStep } from "../../components/sendMoney/TransferMethodStep";
-import { RecipientInfoStep } from "../../components/sendMoney/RecipientInfoStep";
-import { AmountStep } from "../../components/sendMoney/AmountStep";
-import { ReviewStep } from "../../components/sendMoney/ReviewStep";
-import { SuccessScreen } from "../../components/sendMoney/SuccessScreen";
-import { NavigationButtons } from "../../components/sendMoney/NavigationButtons";
+import { StepIndicator } from "../../components/SendMoney/StepIndicator";
+import { TransferMethodStep } from "../../components/SendMoney/TransferMethodStep";
+import { RecipientInfoStep } from "../../components/SendMoney/RecipientInfoStep";
+import { AmountStep } from "../../components/SendMoney/AmountStep";
+import { ReviewStep } from "../../components/SendMoney/ReviewStep";
+import { SuccessScreen } from "../../components/SendMoney/SuccessScreen";
+import { NavigationButtons } from "../../components/SendMoney/NavigationButtons";
 
 const SendMoneyPage = () => {
   const router = useRouter();

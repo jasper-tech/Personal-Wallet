@@ -89,7 +89,7 @@ export default function QuickActions() {
       name: "Request",
       description: "Request money from bank",
       icon: ArrowDownIcon,
-      route: "/request-money",
+      route: "/Dashboard/request-money",
       baseStyle: { ...styles.buttonBase, ...styles.redButton },
       hoverStyle: { ...styles.buttonHovered, ...styles.redButtonHover },
       textStyle: styles.redText,

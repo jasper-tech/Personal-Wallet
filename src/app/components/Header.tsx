@@ -7,6 +7,7 @@ const getTitleFromPath = (pathname: string): string => {
   if (pathname === "/") return "Dashboard";
   if (pathname.includes("/send-money")) return "Send Money";
   if (pathname.includes("/transfer")) return "Transactions";
+  if (pathname.includes("/request-money")) return "Request Money";
 
   return "App";
 };
