@@ -100,7 +100,7 @@ export default function QuickActions() {
       name: "Analytics",
       description: "View detailed analytics",
       icon: ChartBarIcon,
-      route: "/analytics",
+      route: "/Dashboard/analytics",
       baseStyle: { ...styles.buttonBase, ...styles.yellowButton },
       hoverStyle: { ...styles.buttonHovered, ...styles.yellowButtonHover },
       textStyle: styles.yellowText,

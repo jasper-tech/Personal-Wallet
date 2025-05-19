@@ -163,7 +163,7 @@ export default function Charts({ transactions }: ChartsProps) {
                   color: "var(--card-foreground)",
                 }}
                 formatter={(value: number) => [
-                  `$${value.toFixed(2)}`,
+                  `₵${value.toFixed(2)}`,
                   "Amount",
                 ]}
               />
