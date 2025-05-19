@@ -87,7 +87,7 @@ export default function QuickActions() {
     {
       id: "request",
       name: "Request",
-      description: "Request money from someone",
+      description: "Request money from bank",
       icon: ArrowDownIcon,
       route: "/request-money",
       baseStyle: { ...styles.buttonBase, ...styles.redButton },

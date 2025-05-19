@@ -1,6 +1,7 @@
 import React from "react";
 import { CheckCircle } from "lucide-react";
 import { BankAccount } from "@/app/Types/transfer";
+import { useRouter } from "next/navigation";
 
 interface TransferConfirmationProps {
   fromAccount: BankAccount;
@@ -21,8 +22,15 @@ export const TransferConfirmation = ({
   date,
   onClose,
 }: TransferConfirmationProps) => {
+  const router = useRouter();
+
   const amountValue = parseFloat(amount);
   const formattedAmount = isNaN(amountValue) ? "0.00" : amountValue.toFixed(2);
+
+  const handleClose = () => {
+    onClose(); // Keep the original onClose functionality
+    router.push("/"); // Navigate to the homepage
+  };
 
   return (
     <div className=" p-6 rounded-lg border shadow-md max-w-lg mx-auto">
@@ -82,7 +90,7 @@ export const TransferConfirmation = ({
 
       <div className="flex justify-center mt-6">
         <button
-          onClick={onClose}
+          onClick={handleClose}
           className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-md transition-colors"
         >
           Done
