@@ -103,7 +103,7 @@ export default function Charts({ transactions }: ChartsProps) {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
       <div className="bg-card text-card-foreground p-6 rounded-lg shadow">
-        <h3 className="text-lg font-semibold mb-4">
+        <h3 className="text-sm font-semibold mb-4">
           Monthly Income vs Expenses
         </h3>
         <div className="h-80">
@@ -136,7 +136,7 @@ export default function Charts({ transactions }: ChartsProps) {
       </div>
 
       <div className="bg-card text-card-foreground p-6 rounded-lg shadow">
-        <h3 className="text-lg font-semibold mb-4">Spending by Category</h3>
+        <h3 className="text-sm font-semibold mb-4">Spending by Category</h3>
         <div className="h-80">
           <ResponsiveContainer width="100%" height="100%">
             <PieChart>
