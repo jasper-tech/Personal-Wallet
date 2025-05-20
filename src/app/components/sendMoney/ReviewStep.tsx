@@ -56,7 +56,7 @@ export const ReviewStep = ({
 
       {note && (
         <ReviewItem
-          label="Note"
+          label="Reference"
           value={note}
           valueClassName="max-w-xs text-right"
         />
