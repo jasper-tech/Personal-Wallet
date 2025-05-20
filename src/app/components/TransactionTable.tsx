@@ -57,7 +57,7 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
                     <th className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold sm:pl-6">
                       Date
                     </th>
-                    <th className="px-3 py-3.5 text-left text-sm font-semibold">
+                    <th className="hidden px-3 py-3.5 text-left text-sm font-semibold md:table-cell">
                       Description
                     </th>
                     <th className="px-3 py-3.5 text-left text-sm font-semibold">
@@ -78,7 +78,7 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
                         <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-foreground sm:pl-6">
                           {transaction.date}
                         </td>
-                        <td className="whitespace-nowrap px-3 py-4 text-sm text-foreground">
+                        <td className="hidden whitespace-nowrap px-3 py-4 text-sm text-foreground md:table-cell">
                           {transaction.description}
                         </td>
                         <td className="whitespace-nowrap px-3 py-4 text-sm text-foreground">
