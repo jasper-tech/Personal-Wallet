@@ -13,11 +13,13 @@ const styles = {
   buttonBase: {
     transition: "all 0.2s ease-in-out",
     transform: "scale(1)",
-    boxShadow: "var(--shadow-sm)",
+    boxShadow:
+      "0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -4px rgba(0, 0, 0, 0.2)",
   },
   buttonHovered: {
     transform: "scale(1.02)",
-    boxShadow: "var(--shadow-md)",
+    boxShadow:
+      "0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 8px 10px -6px rgba(0, 0, 0, 0.3)",
   },
   blueButton: {
     backgroundColor: "var(--blue-accent-800)",
@@ -113,7 +115,7 @@ export default function QuickActions() {
   };
 
   return (
-    <div className="mt-8 grid grid-cols-1 shadow-xl gap-4 sm:grid-cols-2 lg:grid-cols-4">
+    <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
       {actions.map((action) => (
         <button
           key={action.id}
