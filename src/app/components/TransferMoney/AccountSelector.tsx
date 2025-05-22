@@ -21,7 +21,7 @@ export const AccountSelector = ({
   excludeAccountId,
   error,
 }: AccountSelectorProps) => {
-  // Filter out the excluded account (e.g., don't show "from" account in "to" dropdown)
+  // Excluded account filter
   const filteredAccounts = excludeAccountId
     ? accounts.filter((account) => account.id !== excludeAccountId)
     : accounts;
