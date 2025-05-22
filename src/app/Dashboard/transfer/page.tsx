@@ -24,13 +24,6 @@ import {
 } from "@/app/Types/transfer";
 
 export default function TransferMoney() {
-  // Steps for the transfer process
-  const steps = [
-    { number: 1, label: "Details" },
-    { number: 2, label: "Review" },
-    { number: 3, label: "Confirm" },
-  ];
-
   // Form state
   const [fromAccountId, setFromAccountId] = useState("");
   const [toAccountId, setToAccountId] = useState("");
@@ -49,12 +42,10 @@ export default function TransferMoney() {
   const [transferDate, setTransferDate] = useState<Date>(new Date());
   const router = useRouter();
 
-  // Data state
   const [accounts, setAccounts] = useState<BankAccount[]>(mockAccounts);
   const [transactions, setTransactions] =
     useState<TransferHistoryItem[]>(mockTransactions);
 
-  // Derived values
   const fromAccount = accounts.find((acc) => acc.id === fromAccountId);
   const toAccount = accounts.find((acc) => acc.id === toAccountId);
 
@@ -176,7 +167,7 @@ export default function TransferMoney() {
       </div>
       {!isTransferComplete ? (
         <>
-          <StepIndicator currentStep={currentStep} steps={steps} />
+          <StepIndicator currentStep={currentStep} />
 
           {currentStep === 1 && (
             <div className="space-y-6">
@@ -276,15 +267,6 @@ export default function TransferMoney() {
             onClose={resetForm}
           />
         )
-      )}
-
-      {currentStep === 1 && !isTransferComplete && (
-        <div className="mt-12">
-          {/* <TransactionsList
-            transactions={transactions}
-            currentAccountId={fromAccountId || undefined}
-          /> */}
-        </div>
       )}
     </div>
   );
