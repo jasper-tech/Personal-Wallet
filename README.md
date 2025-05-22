@@ -1,36 +1,141 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Personal Wallet Frontend Application
 
-## Getting Started
+## 🚀 Getting Started
 
-First, run the development server:
+### Prerequisites
+
+Before running this application, ensure you have the following installed:
+
+- **Node.js**: Version 18.0 or higher ([Download Node.js](https://nodejs.org/))
+- **npm**: Usually comes with Node.js installation
+- **Git**: For cloning the repository ([Download Git](https://git-scm.com/))
+
+### Installation Steps
+
+1. **Clone the Repository**
+
+   ```bash
+   git clone <https://github.com/jasper-tech/Personal-Wallet.git>
+   cd personal-wallet
+   ```
+
+2. **Install Dependencies**
+
+   ```bash
+   npm install
+   ```
+
+   This command will install all required packages including:
+
+   - Next.js and React
+   - TypeScript and type definitions
+   - Tailwind CSS and PostCSS
+   - Lucide React icons
+   - Recharts for data visualization
+   - Other development dependencies
+
+3. **Start the Development Server**
+
+   ```bash
+   npm run dev
+   ```
+
+4. **Open Your Browser**
+   Navigate to [http://localhost:3000](http://localhost:3000) to view the application.
+
+### Available Scripts
+
+- `npm run dev`: Starts the development server with hot reload
+- `npm run build`: Creates an optimized production build
+- `npm run start`: Runs the production build (requires `npm run build` first)
+- `npm run lint`: Runs ESLint to check code quality
+- `npm run type-check`: Runs TypeScript compiler to check types
+
+### Development Environment Setup
+
+1. **Verify Installation**
+
+   ```bash
+   node --version  # Should show v18.0.0 or higher
+   npm --version   # Should show 8.0.0 or higher
+   ```
+
+2. **Environment Configuration**
+   The application uses mock data and doesn't require environment variables for basic functionality.
+
+3. **Code Editor Setup** (Recommended)
+   - Install VS Code extensions:
+     - TypeScript and JavaScript Language Features
+     - Tailwind CSS IntelliSense
+     - ESLint
+     - Prettier
+
+## 📱 Responsive Design
+
+The application is fully responsive and optimized for:
+
+- **Desktop**: Full-featured experience with sidebar navigation
+- **Tablet**: Adapted layout with collapsible navigation
+- **Mobile**: Touch-optimized interface with bottom navigation
+
+## 🧪 Mock Data
+
+The application uses realistic mock data including:
+
+- Sample transactions with various categories and statuses
+- Contact lists for fund transfers
+- Historical spending data for charts and analytics
+- Account balance and financial statistics
+
+## 🔧 Customization
+
+### Styling
+
+- Modify `tailwind.config.js` for custom colors and themes
+- Update component styles in individual component files
+- Global styles can be modified in `src/styles/globals.css`
+
+### Data Structure
+
+- Transaction types and categories can be modified in `src/types/`
+- Mock data can be updated in `src/data/`
+
+### Production Build
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm run build
+npm run start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 📄 License
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+This project was created as an assignment.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🆘 Troubleshooting
 
-## Learn More
+### Common Issues
 
-To learn more about Next.js, take a look at the following resources:
+1. **Node modules not found**
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+   ```bash
+   rm -rf node_modules package-lock.json
+   npm install
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+2. **Port already in use**
 
-## Deploy on Vercel
+   ```bash
+   npm run dev -- -p 3001  # Use different port
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+3. **TypeScript errors**
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+   ```bash
+   npm run type-check  # Check for type errors
+   ```
+
+   ```
+
+   ```
+
+**Built with Next.js, TypeScript, and Tailwind CSS**
