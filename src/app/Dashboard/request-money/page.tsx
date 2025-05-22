@@ -27,7 +27,6 @@ export default function RequestMoneyPage() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const router = useRouter();
 
-  // Derived state
   const selectedBank = useMemo(
     () => bankAccounts.find((bank) => bank.id === selectedBankId) || null,
     [selectedBankId]
