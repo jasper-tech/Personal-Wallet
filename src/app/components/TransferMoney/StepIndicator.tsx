@@ -9,7 +9,7 @@ interface StepIndicatorProps {
 }
 
 export const StepIndicator = ({ currentStep, steps }: StepIndicatorProps) => {
-  // Calculate progress based on number of segments between steps
+  // Calculate progress
   const totalSegments = steps.length - 1;
   const progressPercentage = Math.min(
     ((currentStep - 1) / totalSegments) * 100,
