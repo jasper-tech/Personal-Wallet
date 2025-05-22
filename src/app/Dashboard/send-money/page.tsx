@@ -73,7 +73,9 @@ const SendMoneyPage = () => {
   }, [transferMethod, recipientInfo, amount, validateRecipientInfo]);
 
   const handleRecipientChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
   ) => {
     const { name, value } = e.target;
     setRecipientInfo({
