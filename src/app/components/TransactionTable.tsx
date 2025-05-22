@@ -1,4 +1,5 @@
 import React from "react";
+import { Github } from "lucide-react";
 import { Transaction } from "../data/mockData";
 
 interface TransactionTableProps {
@@ -45,6 +46,14 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
   onPreviousPage,
   onNextPage,
 }) => {
+  const handleGitHubClick = () => {
+    window.open(
+      "https://github.com/jasper-tech/Personal-Wallet",
+      "_blank",
+      "noopener,noreferrer"
+    );
+  };
+
   return (
     <>
       <div className="mt-8">
@@ -123,41 +132,42 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
         </div>
       </div>
 
-      {/* Pagination controls */}
+      {/* Pagination controls  */}
       <div className="mt-4 flex items-center justify-between px-4 sm:px-6">
+        {/* Mobile view */}
         <div className="flex flex-1 justify-between sm:hidden">
-          <button
-            onClick={onPreviousPage}
-            disabled={currentPage === 1}
-            className="relative inline-flex items-center rounded-md border border-gray-300  px-4 py-2 text-sm font-medium hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed dark:border-gray-600  dark:hover:bg-gray-700"
-          >
-            Previous
-          </button>
+          <div className="flex items-center">
+            <button
+              onClick={onPreviousPage}
+              disabled={currentPage === 1}
+              className="relative inline-flex items-center rounded-md border border-gray-300  px-4 py-2 text-sm font-medium hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed dark:border-gray-600  dark:hover:bg-gray-700"
+            >
+              Previous
+            </button>
+          </div>
           <button
             onClick={onNextPage}
             disabled={currentPage === totalPages}
-            className="relative ml-3 inline-flex items-center rounded-md border border-gray-300  px-4 py-2 text-sm font-medium hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed dark:border-gray-600  dark:hover:bg-gray-700"
+            className="relative inline-flex items-center rounded-md border border-gray-300  px-4 py-2 text-sm font-medium hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed dark:border-gray-600  dark:hover:bg-gray-700"
           >
             Next
           </button>
         </div>
+
+        {/* Desktop view */}
         <div className="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
-          <div>
-            {/* <p className="text-sm">
-              Showing{" "}
-              <span className="font-medium">
-                {transactions.length > 0
-                  ? (currentPage - 1) * Math.min(transactions.length, 6) + 1
-                  : 0}
-              </span>{" "}
-              to{" "}
-              <span className="font-medium">
-                {Math.min(currentPage * 6, transactions.length)}
-              </span>{" "}
-              of <span className="font-medium">{transactions.length}</span>{" "}
-              results
-            </p> */}
+          {/* GitHub icon on the left */}
+          <div className="flex items-center">
+            <button
+              onClick={handleGitHubClick}
+              className="p-2 rounded-md text-gray-400 hover:text-gray-700 hover:bg-gray-100 transition-colors dark:text-gray-400 dark:hover:text-gray-300 dark:hover:bg-gray-800"
+              title="View GitHub Repository"
+            >
+              <Github className="h-5 w-5" />
+            </button>
           </div>
+
+          {/* Pagination controls on the right */}
           <div>
             <nav
               className="isolate inline-flex -space-x-px rounded-md shadow-sm"
