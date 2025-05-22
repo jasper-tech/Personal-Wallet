@@ -15,7 +15,7 @@ Before running this application, ensure you have the following installed:
 1. **Clone the Repository**
 
    ```bash
-   git clone <https://github.com/jasper-tech/Personal-Wallet.git>
+   git clone https://github.com/jasper-tech/Personal-Wallet.git
    cd personal-wallet
    ```
 
@@ -110,32 +110,5 @@ npm run start
 ## 📄 License
 
 This project was created as an assignment.
-
-## 🆘 Troubleshooting
-
-### Common Issues
-
-1. **Node modules not found**
-
-   ```bash
-   rm -rf node_modules package-lock.json
-   npm install
-   ```
-
-2. **Port already in use**
-
-   ```bash
-   npm run dev -- -p 3001  # Use different port
-   ```
-
-3. **TypeScript errors**
-
-   ```bash
-   npm run type-check  # Check for type errors
-   ```
-
-   ```
-
-   ```
 
 **Built with Next.js, TypeScript, and Tailwind CSS**
