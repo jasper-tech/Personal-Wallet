@@ -87,14 +87,6 @@ The application uses realistic mock data including:
 - Historical spending data for charts and analytics
 - Account balance and financial statistics
 
-## 🔧 Customization
-
-### Styling
-
-- Modify `tailwind.config.js` for custom colors and themes
-- Update component styles in individual component files
-- Global styles can be modified in `src/styles/globals.css`
-
 ### Data Structure
 
 - Transaction types and categories can be modified in `src/types/`
